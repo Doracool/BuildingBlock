@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC3A71521C5CDAAD00FA1C5D /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */; };
+		CC3A71541C5CED6300FA1C5D /* Lanch4.png in Resources */ = {isa = PBXBuildFile; fileRef = CC3A71531C5CED6300FA1C5D /* Lanch4.png */; };
 		CC4041591C5A56DF00D872F2 /* 消除.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC4041581C5A56DF00D872F2 /* 消除.mp3 */; };
 		CC62A50D1C589CE600D55158 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC62A50C1C589CE600D55158 /* AppDelegate.swift */; };
 		CC62A50F1C589CE600D55158 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC62A50E1C589CE600D55158 /* ViewController.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		CC3A71531C5CED6300FA1C5D /* Lanch4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lanch4.png; sourceTree = "<group>"; };
 		CC4041581C5A56DF00D872F2 /* 消除.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "消除.mp3"; sourceTree = "<group>"; };
 		CC62A5091C589CE600D55158 /* BuildingBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildingBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC62A50C1C589CE600D55158 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,11 +109,13 @@
 		CC62A50B1C589CE600D55158 /* BuildingBlock */ = {
 			isa = PBXGroup;
 			children = (
+				CC3A71531C5CED6300FA1C5D /* Lanch4.png */,
 				CC4041581C5A56DF00D872F2 /* 消除.mp3 */,
 				CC62A53C1C58E27D00D55158 /* bgMusic.mp3 */,
 				CC62A50C1C589CE600D55158 /* AppDelegate.swift */,
 				CC62A50E1C589CE600D55158 /* ViewController.swift */,
 				CC62A5401C58F08900D55158 /* GameView.swift */,
+				CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */,
 				CC62A5421C58F3F700D55158 /* Block.swift */,
 				CC62A5101C589CE600D55158 /* Main.storyboard */,
 				CC62A5131C589CE600D55158 /* Assets.xcassets */,
@@ -205,6 +211,7 @@
 				TargetAttributes = {
 					CC62A5081C589CE600D55158 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = E96PEC2X33;
 					};
 					CC62A51C1C589CE600D55158 = {
 						CreatedOnToolsVersion = 7.2;
@@ -242,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC4041591C5A56DF00D872F2 /* 消除.mp3 in Resources */,
+				CC3A71541C5CED6300FA1C5D /* Lanch4.png in Resources */,
 				CC62A5171C589CE600D55158 /* LaunchScreen.storyboard in Resources */,
 				CC62A5141C589CE600D55158 /* Assets.xcassets in Resources */,
 				CC62A5121C589CE600D55158 /* Main.storyboard in Resources */,
@@ -270,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC3A71521C5CDAAD00FA1C5D /* CustomView.swift in Sources */,
 				CC62A50F1C589CE600D55158 /* ViewController.swift in Sources */,
 				CC62A5431C58F3F700D55158 /* Block.swift in Sources */,
 				CC62A5411C58F08900D55158 /* GameView.swift in Sources */,
@@ -413,10 +422,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BuildingBlock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hnqingyun.BuildingBlock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -424,10 +436,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BuildingBlock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hnqingyun.BuildingBlock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

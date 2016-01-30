@@ -22,7 +22,7 @@ func - (left: Int , right: Double) ->Double{
 //协议
 protocol GameViewDelegate
 {
-    func updataSoure(score:Int)
+    func updataScore(score:Int)
     func updataSpeed(speed:Int)
 }
 
@@ -34,7 +34,7 @@ class GameView: UIView {
     let THTRIS_COLS = 15
     let CELL_SIZE :Int
     //绘制网格的笔触的粗细
-    let STROKE_WIDTH :Double = 2.0
+    let STROKE_WIDTH :Double = 1.0
     let BASE_SPEED :Double = 0.6
     //没方块为0
     let NO_BLOCK = 0
@@ -45,6 +45,9 @@ class GameView: UIView {
     var image: UIImage!
     //当前的计时器
     var curTimer: NSTimer!
+    
+    var currentIndex: Int!
+    
     //定义方块的颜色
     let colors = [UIColor.whiteColor().CGColor,
     UIColor.redColor().CGColor,
@@ -61,7 +64,7 @@ class GameView: UIView {
     var tetris_status = [[Int]]()
     var currentFall: [Block]!
     var curScore :Int = 0
-    var curSpeed :Int = 1
+    var curSpeed = 1
     
     //重写init方法
     override init(frame: CGRect) {
@@ -155,6 +158,7 @@ class GameView: UIView {
     
     func initTetrisStats()
     {
+        //把准备加入数组的数据 的数量 和初始值 传入
         let tmpRow = Array(count: THTRIS_COLS, repeatedValue: NO_BLOCK)
         tetris_status = Array(count: THTRIS_ROWS, repeatedValue: tmpRow)
     }
@@ -166,6 +170,7 @@ class GameView: UIView {
         let randomRoll = Int(arc4random_uniform(diceFaceCount))
         //随机出数组中的某个元素作为现在正在下落的方块
         currentFall = blockArr[randomRoll]
+        currentIndex = randomRoll
     }
     
     func cresteCells(rows:Int, cols:Int ,cellWidth :Int ,cellHeight :Int)
@@ -274,7 +279,6 @@ class GameView: UIView {
             //绘制矩形
             CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
         }
-//        initBlock()
     }
         else
         {
@@ -285,10 +289,24 @@ class GameView: UIView {
                 {
                     curTimer.invalidate()
                     //显示提示框
+                    let alert = UIAlertController(title: "提醒", message: "胜败乃兵家常事,大侠请重新来过", preferredStyle: UIAlertControllerStyle.Alert)
+                    let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                        
+                    })
+                    let contuineAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                        self.startGame()
+                    })
+                    
+                    alert.addAction(cancelAction)
+                    alert.addAction(contuineAction)
+                    
+                    UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
                     return
                 }
                 tetris_status[cur.y][cur.x] = cur.color
+                
             }
+            lineFull()
             initBlock()
         }
         
@@ -297,12 +315,220 @@ class GameView: UIView {
         self.setNeedsDisplay()
     }
     
+    func lineFull()
+    {
+        //一次遍历每一行
+        for var i = 0 ; i < THTRIS_ROWS ; i++
+        {
+            var flag = true
+            //遍历当前的每一个单元格
+            for var j = 0 ; j < THTRIS_COLS ; j++
+            {
+                if tetris_status[i][j] == NO_BLOCK
+                {
+                    flag = false
+                    break
+                }
+            }
+            //如果全部由方块
+            if flag
+            {
+                //积分增加10
+                curScore += 10
+                self.delegate.updataScore(curScore)
+                //如果达到升级条件
+                if curScore >= curSpeed * curSpeed * 500
+                {
+                    //速度加快
+                    curSpeed += 1
+                    self.delegate.updataSpeed(curSpeed)
+                    //让原有计时器失效重启记时
+                    curTimer.invalidate()
+                    curTimer = NSTimer.scheduledTimerWithTimeInterval((BASE_SPEED / Double(curSpeed)), target: self, selector: "moveDown", userInfo: nil, repeats: true)
+                }
+                //将当前的所有方块下移
+                for var j = i ; j > 0 ; j--
+                {
+                    for var k = 0 ; k < THTRIS_COLS ; k++
+                    {
+                        tetris_status[j][k] = tetris_status[j-1][k]
+                    }
+                }
+                //播放消除音乐
+                if !disPlayer.playing
+                {
+                    disPlayer.play()
+                }
+            }
+        }
+    }
+    func moveLeft()
+    {
+        //判断是否可以左移
+        var canLeft = true
+    
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            //如果已经移到左边了
+            if currentFall[i].x <= 0
+            {
+                canLeft = false
+                break
+            }
+            //或者有方块
+            if tetris_status[currentFall[i].y][currentFall[i].x - 1] != NO_BLOCK
+            {
+                canLeft = false
+                break
+            }
+        }
+        if canLeft
+        {
+        //可以左移
+        self.drawBlock()
+        //将左移前的方块涂成白色
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            let cur = currentFall[i]
+            CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+            CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+        }
+        //左移所有正在下降的方块
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            currentFall[i].x--
+        }
+        //将左移的方块渲染颜色
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            let cur = currentFall[i]
+            CGContextSetFillColorWithColor(ctx, colors[cur.color])
+            CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+        }
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        self.setNeedsDisplay()
+    }
+    
+    }
+    
+    func moveRight()
+    {
+        //判断是否可以右移
+        var canRigth = true
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            //如果已经移动到右边了
+            if currentFall[i].x >= THTRIS_COLS - 1
+            {
+                canRigth = false
+                break
+            }
+            //如果右边有方块不能移动
+            if tetris_status[currentFall[i].y][currentFall[i].x + 1] != NO_BLOCK
+            {
+                canRigth = false
+                break
+            }
+        }
+        //能够右移
+        if canRigth
+        {
+            self.drawBlock()
+            //将右移前的方块涂成白色
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                let cur = currentFall[i]
+                
+                CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+            }
+            //右移所有正在下降的方块
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                currentFall[i].x++
+            }
+            //将右移的方块渲染颜色
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                let cur = currentFall[i]
+                CGContextSetFillColorWithColor(ctx, colors[cur.color])
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+            }
+            image = UIGraphicsGetImageFromCurrentImageContext()
+            self.setNeedsDisplay()
+        }
+    }
+    
+    func rotate()
+    {
+        //判断是否可以旋转
+        var canRotate = true
+        if currentIndex == 2
+        {
+            
+        }
+        else
+        {
+        for var i = 0 ; i < currentFall.count ; i++
+        {
+            let preX = currentFall[i].x
+            let preY = currentFall[i].y
+            if i != 2
+            {
+                //计算旋转后的坐标
+                let afterRotateX = currentFall[2].x + preY - currentFall[2].y
+                let afterRotatrY = currentFall[2].y + currentFall[2].x - preX
+                
+                //如果旋转后出界
+                if afterRotateX < 0 || afterRotateX > THTRIS_COLS - 1 || afterRotatrY < 0 || afterRotatrY > THTRIS_ROWS - 1 || tetris_status[afterRotatrY][afterRotateX] != NO_BLOCK
+                {
+                    canRotate = false
+                    break
+                    
+                }
+        }
+        }
+        
+        if canRotate
+        {
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                let cur = currentFall[i]
+                
+                CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+            }
+            
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                let preX = currentFall[i].x
+                let preY = currentFall[i].y
+                
+                if i != 2
+                {
+                    currentFall[i].x = currentFall[2].x + preY - currentFall[2].y
+                    currentFall[i].y = currentFall[2].y + currentFall[2].x - preX
+                }
+            }
+            
+            for var i = 0 ; i < currentFall.count ; i++
+            {
+                let cur = currentFall[i]
+                
+                CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+            }
+            image = UIGraphicsGetImageFromCurrentImageContext()
+            self.setNeedsDisplay()
+        }
+    }
+    }
     func startGame()
     {
         self.curSpeed = 1
         self.delegate.updataSpeed(self.curSpeed)
         self.curScore = 0
-        self.delegate.updataSoure(self.curScore)
+        self.delegate.updataScore(self.curScore)
         
         initTetrisStats()
         

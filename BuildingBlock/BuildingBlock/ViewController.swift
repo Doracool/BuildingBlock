@@ -35,22 +35,23 @@ class ViewController: UIViewController ,GameViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //背景颜色
         self.view.backgroundColor = UIColor.whiteColor()
         //设置大小
         let rect = UIScreen.mainScreen().bounds
         screenWidth = rect.size.width
         screenHeight = rect.size.height
-        
+        addToolBar()
         let gameRect = CGRectMake(rect.origin.x + MARGINE, rect.origin.y + TOOLBAR_HEIGHT + 2 * MARGINE, rect.size.width - MARGINE * 2, rect.size.height - BUTTON_SIZE * 2 - TOOLBAR_HEIGHT)
         gameView = GameView(frame: gameRect)
         gameView.delegate = self
         self.view.addSubview(gameView)
+        
+        
         //添加背景音乐
         let bgMusicUrl = NSBundle.mainBundle().URLForResource("bgMusic", withExtension: "mp3")
         gameView.startGame()
-        addToolBar()
+        
         addButtons()
         do
         {
@@ -140,27 +141,30 @@ class ViewController: UIViewController ,GameViewDelegate {
     
     func left(sender:UIButton)
     {
-        print("zuo")
+//        print("zuo")
+        gameView.moveLeft()
     }
     func up(sender:UIButton){
-        print("up")
+//        print("up")
+        gameView.rotate()
     }
     func right(sender:UIButton){
-        print("right")
+//        print("right")
+        gameView.moveRight()
     }
     func down(sender:UIButton){
-        print("down")
+//        print("down")
+        gameView.moveDown()
     }
     
-    func updataSoure(score: Int) {
-        //更新分数
-//        self.scoreShow.text = "\(score)"
+    func updataScore(score: Int) {
+        self.scoreShow.text = "\(score)"
     }
     
     func updataSpeed(speed: Int) {
-        //更新速度
-//        self.speedShow.text = "\(speed)"
+        self.speedShow.text = "\(speed)"
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
