@@ -45,8 +45,9 @@ class GameView: UIView {
     var image: UIImage!
     //当前的计时器
     var curTimer: NSTimer!
-    
+
     var currentIndex: Int!
+    var isStop:UIButton!
     
     //定义方块的颜色
     let colors = [UIColor.whiteColor().CGColor,
@@ -65,6 +66,8 @@ class GameView: UIView {
     var currentFall: [Block]!
     var curScore :Int = 0
     var curSpeed = 1
+    
+    var canDown = true
     
     //重写init方法
     override init(frame: CGRect) {
@@ -158,6 +161,8 @@ class GameView: UIView {
     
     func initTetrisStats()
     {
+        isStop = UIButton.init(type: UIButtonType.Custom)
+        isStop.setTitle("asd", forState: UIControlState.Normal)
         //把准备加入数组的数据 的数量 和初始值 传入
         let tmpRow = Array(count: THTRIS_COLS, repeatedValue: NO_BLOCK)
         tetris_status = Array(count: THTRIS_ROWS, repeatedValue: tmpRow)
@@ -237,7 +242,8 @@ class GameView: UIView {
     {
         //定义向下的标记
         var canDown = true
-        
+//        var isStop = false
+//        curTimer.fireDate = NSDate.distantPast()
         //判断当前的滑块是不是可以下滑
         for var i = 0 ; i < currentFall.count ; i++
         {
@@ -315,6 +321,8 @@ class GameView: UIView {
         self.setNeedsDisplay()
     }
     
+
+    
     func lineFull()
     {
         //一次遍历每一行
@@ -337,7 +345,7 @@ class GameView: UIView {
                 curScore += 10
                 self.delegate.updataScore(curScore)
                 //如果达到升级条件
-                if curScore >= curSpeed * curSpeed * 500
+                if curScore >= curSpeed * curSpeed * 200
                 {
                     //速度加快
                     curSpeed += 1
@@ -361,6 +369,31 @@ class GameView: UIView {
                 }
             }
         }
+    }
+    
+    func gameSTop()
+    {
+        if isStop.titleLabel?.text == "asd"
+        {
+            
+            isStop.setTitle("dsa", forState: UIControlState.Normal)
+            curTimer.fireDate = NSDate.distantFuture()
+        }else
+        {
+            isStop.setTitle("asd", forState: UIControlState.Normal)
+            curTimer.fireDate = NSDate.distantPast()
+        }
+    }
+    
+    
+    func gameStop()
+    {
+        curTimer.fireDate = NSDate.distantFuture()
+    }
+    
+    func countinue()
+    {
+        curTimer.fireDate = NSDate.distantPast()
     }
     func moveLeft()
     {
@@ -461,7 +494,6 @@ class GameView: UIView {
     
     func rotate()
     {
-        //判断是否可以旋转
         var canRotate = true
         if currentIndex == 2
         {
@@ -473,20 +505,19 @@ class GameView: UIView {
         {
             let preX = currentFall[i].x
             let preY = currentFall[i].y
+            
             if i != 2
             {
                 //计算旋转后的坐标
                 let afterRotateX = currentFall[2].x + preY - currentFall[2].y
-                let afterRotatrY = currentFall[2].y + currentFall[2].x - preX
-                
-                //如果旋转后出界
-                if afterRotateX < 0 || afterRotateX > THTRIS_COLS - 1 || afterRotatrY < 0 || afterRotatrY > THTRIS_ROWS - 1 || tetris_status[afterRotatrY][afterRotateX] != NO_BLOCK
+                let afterRotateY = currentFall[2].y + currentFall[2].x - preX
+                //如果旋转后的x。y越界或者旋转后的位置已有方块，表明不能旋转
+                if afterRotateX < 0 || afterRotateX > THTRIS_COLS - 1 || afterRotateY < 0 || afterRotateY > THTRIS_ROWS - 1||tetris_status[afterRotateY][afterRotateX] != NO_BLOCK
                 {
                     canRotate = false
                     break
-                    
                 }
-        }
+            }
         }
         
         if canRotate
@@ -496,7 +527,7 @@ class GameView: UIView {
                 let cur = currentFall[i]
                 
                 CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
-                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x*CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y*CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH*2), CGFloat(CELL_SIZE - STROKE_WIDTH*2)))
             }
             
             for var i = 0 ; i < currentFall.count ; i++
@@ -509,20 +540,24 @@ class GameView: UIView {
                     currentFall[i].x = currentFall[2].x + preY - currentFall[2].y
                     currentFall[i].y = currentFall[2].y + currentFall[2].x - preX
                 }
+                
             }
             
             for var i = 0 ; i < currentFall.count ; i++
             {
                 let cur = currentFall[i]
                 
-                CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
-                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x * CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y * CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH * 2), CGFloat(CELL_SIZE - STROKE_WIDTH * 2)))
+                CGContextSetFillColorWithColor(ctx, colors[cur.color])
+                CGContextFillRect(ctx, CGRectMake(CGFloat(cur.x*CELL_SIZE + STROKE_WIDTH), CGFloat(cur.y*CELL_SIZE + STROKE_WIDTH), CGFloat(CELL_SIZE - STROKE_WIDTH*2), CGFloat(CELL_SIZE - STROKE_WIDTH*2)))
             }
+            
             image = UIGraphicsGetImageFromCurrentImageContext()
+            
             self.setNeedsDisplay()
         }
     }
-    }
+}
+
     func startGame()
     {
         self.curSpeed = 1
@@ -533,7 +568,8 @@ class GameView: UIView {
         initTetrisStats()
         
         initBlock()
-        
+//        self.isStop.titleLabel?.text = ""
+//        var isStop = false
         curTimer = NSTimer.scheduledTimerWithTimeInterval(BASE_SPEED / Double(curSpeed), target: self, selector: "moveDown", userInfo: nil, repeats: true)
     }
 

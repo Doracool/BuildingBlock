@@ -15,7 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        self.window?.backgroundColor = UIColor.whiteColor()
+        let BengIN = BeginVC()
+        //创建导航控制器
+        let nav = UINavigationController(rootViewController: BengIN)
+        
+        self.window!.rootViewController = nav
         return true
     }
 

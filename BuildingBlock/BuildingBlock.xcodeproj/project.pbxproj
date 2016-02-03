@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0F634B1C5F078D0089B9CD /* BeginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F634A1C5F078D0089B9CD /* BeginVC.swift */; };
+		CC0F634D1C5F0ECC0089B9CD /* RevViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F634C1C5F0ECC0089B9CD /* RevViewController.swift */; };
+		CC0F63511C5F28250089B9CD /* RevgameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F63501C5F28250089B9CD /* RevgameView.swift */; };
+		CC2FB4C91C607EEC008C7EF5 /* 时光十年.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4C81C607EEC008C7EF5 /* 时光十年.png */; };
+		CC2FB4CB1C608370008C7EF5 /* QYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2FB4CA1C608370008C7EF5 /* QYViewController.swift */; };
+		CC2FB4CF1C6089CC008C7EF5 /* iconfont-fanhui.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4CE1C6089CC008C7EF5 /* iconfont-fanhui.png */; };
+		CC2FB4DC1C609C4A008C7EF5 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4D81C609C4A008C7EF5 /* down.png */; };
+		CC2FB4DD1C609C4A008C7EF5 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4D91C609C4A008C7EF5 /* left.png */; };
+		CC2FB4DE1C609C4A008C7EF5 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4DA1C609C4A008C7EF5 /* right.png */; };
+		CC2FB4DF1C609C4A008C7EF5 /* xuanzhuan.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4DB1C609C4A008C7EF5 /* xuanzhuan.png */; };
+		CC2FB4E21C60C395008C7EF5 /* normal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E01C60C395008C7EF5 /* normal.mp3 */; };
+		CC2FB4E31C60C395008C7EF5 /* UNnormal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E11C60C395008C7EF5 /* UNnormal.mp3 */; };
+		CC2FB4E91C60CD63008C7EF5 /* countin.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E51C60CD63008C7EF5 /* countin.png */; };
+		CC2FB4EA1C60CD63008C7EF5 /* OpenMusic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E61C60CD63008C7EF5 /* OpenMusic.png */; };
+		CC2FB4EB1C60CD63008C7EF5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E71C60CD63008C7EF5 /* stop.png */; };
+		CC2FB4EC1C60CD63008C7EF5 /* StopMucic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4E81C60CD63008C7EF5 /* StopMucic.png */; };
+		CC2FB4F31C60E82A008C7EF5 /* lunch.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4F11C60E82A008C7EF5 /* lunch.png */; };
+		CC2FB4F41C60E82A008C7EF5 /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2FB4F21C60E82A008C7EF5 /* view.png */; };
 		CC3A71521C5CDAAD00FA1C5D /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */; };
 		CC3A71541C5CED6300FA1C5D /* Lanch4.png in Resources */ = {isa = PBXBuildFile; fileRef = CC3A71531C5CED6300FA1C5D /* Lanch4.png */; };
 		CC4041591C5A56DF00D872F2 /* 消除.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC4041581C5A56DF00D872F2 /* 消除.mp3 */; };
@@ -40,6 +58,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC0F634A1C5F078D0089B9CD /* BeginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginVC.swift; sourceTree = "<group>"; };
+		CC0F634C1C5F0ECC0089B9CD /* RevViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevViewController.swift; sourceTree = "<group>"; };
+		CC0F63501C5F28250089B9CD /* RevgameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevgameView.swift; sourceTree = "<group>"; };
+		CC2FB4C81C607EEC008C7EF5 /* 时光十年.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时光十年.png"; sourceTree = "<group>"; };
+		CC2FB4CA1C608370008C7EF5 /* QYViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QYViewController.swift; sourceTree = "<group>"; };
+		CC2FB4CE1C6089CC008C7EF5 /* iconfont-fanhui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhui.png"; sourceTree = "<group>"; };
+		CC2FB4D81C609C4A008C7EF5 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
+		CC2FB4D91C609C4A008C7EF5 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
+		CC2FB4DA1C609C4A008C7EF5 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
+		CC2FB4DB1C609C4A008C7EF5 /* xuanzhuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuanzhuan.png; sourceTree = "<group>"; };
+		CC2FB4E01C60C395008C7EF5 /* normal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = normal.mp3; sourceTree = "<group>"; };
+		CC2FB4E11C60C395008C7EF5 /* UNnormal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = UNnormal.mp3; sourceTree = "<group>"; };
+		CC2FB4E51C60CD63008C7EF5 /* countin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = countin.png; sourceTree = "<group>"; };
+		CC2FB4E61C60CD63008C7EF5 /* OpenMusic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpenMusic.png; sourceTree = "<group>"; };
+		CC2FB4E71C60CD63008C7EF5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		CC2FB4E81C60CD63008C7EF5 /* StopMucic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopMucic.png; sourceTree = "<group>"; };
+		CC2FB4F11C60E82A008C7EF5 /* lunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunch.png; sourceTree = "<group>"; };
+		CC2FB4F21C60E82A008C7EF5 /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
 		CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		CC3A71531C5CED6300FA1C5D /* Lanch4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lanch4.png; sourceTree = "<group>"; };
 		CC4041581C5A56DF00D872F2 /* 消除.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "消除.mp3"; sourceTree = "<group>"; };
@@ -86,6 +122,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC2FB4E41C60CCD5008C7EF5 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				CC2FB4F11C60E82A008C7EF5 /* lunch.png */,
+				CC2FB4F21C60E82A008C7EF5 /* view.png */,
+				CC2FB4E51C60CD63008C7EF5 /* countin.png */,
+				CC2FB4E61C60CD63008C7EF5 /* OpenMusic.png */,
+				CC2FB4E71C60CD63008C7EF5 /* stop.png */,
+				CC2FB4E81C60CD63008C7EF5 /* StopMucic.png */,
+				CC2FB4E01C60C395008C7EF5 /* normal.mp3 */,
+				CC2FB4E11C60C395008C7EF5 /* UNnormal.mp3 */,
+				CC2FB4D81C609C4A008C7EF5 /* down.png */,
+				CC2FB4D91C609C4A008C7EF5 /* left.png */,
+				CC2FB4DA1C609C4A008C7EF5 /* right.png */,
+				CC2FB4DB1C609C4A008C7EF5 /* xuanzhuan.png */,
+				CC2FB4CE1C6089CC008C7EF5 /* iconfont-fanhui.png */,
+				CC2FB4C81C607EEC008C7EF5 /* 时光十年.png */,
+				CC3A71531C5CED6300FA1C5D /* Lanch4.png */,
+				CC4041581C5A56DF00D872F2 /* 消除.mp3 */,
+				CC62A53C1C58E27D00D55158 /* bgMusic.mp3 */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
 		CC62A5001C589CE600D55158 = {
 			isa = PBXGroup;
 			children = (
@@ -109,12 +169,14 @@
 		CC62A50B1C589CE600D55158 /* BuildingBlock */ = {
 			isa = PBXGroup;
 			children = (
-				CC3A71531C5CED6300FA1C5D /* Lanch4.png */,
-				CC4041581C5A56DF00D872F2 /* 消除.mp3 */,
-				CC62A53C1C58E27D00D55158 /* bgMusic.mp3 */,
+				CC2FB4E41C60CCD5008C7EF5 /* other */,
 				CC62A50C1C589CE600D55158 /* AppDelegate.swift */,
 				CC62A50E1C589CE600D55158 /* ViewController.swift */,
+				CC2FB4CA1C608370008C7EF5 /* QYViewController.swift */,
+				CC0F634A1C5F078D0089B9CD /* BeginVC.swift */,
 				CC62A5401C58F08900D55158 /* GameView.swift */,
+				CC0F634C1C5F0ECC0089B9CD /* RevViewController.swift */,
+				CC0F63501C5F28250089B9CD /* RevgameView.swift */,
 				CC3A71511C5CDAAD00FA1C5D /* CustomView.swift */,
 				CC62A5421C58F3F700D55158 /* Block.swift */,
 				CC62A5101C589CE600D55158 /* Main.storyboard */,
@@ -250,10 +312,24 @@
 			files = (
 				CC4041591C5A56DF00D872F2 /* 消除.mp3 in Resources */,
 				CC3A71541C5CED6300FA1C5D /* Lanch4.png in Resources */,
+				CC2FB4E21C60C395008C7EF5 /* normal.mp3 in Resources */,
+				CC2FB4EA1C60CD63008C7EF5 /* OpenMusic.png in Resources */,
+				CC2FB4DE1C609C4A008C7EF5 /* right.png in Resources */,
+				CC2FB4DC1C609C4A008C7EF5 /* down.png in Resources */,
+				CC2FB4F41C60E82A008C7EF5 /* view.png in Resources */,
+				CC2FB4F31C60E82A008C7EF5 /* lunch.png in Resources */,
 				CC62A5171C589CE600D55158 /* LaunchScreen.storyboard in Resources */,
+				CC2FB4EB1C60CD63008C7EF5 /* stop.png in Resources */,
+				CC2FB4E91C60CD63008C7EF5 /* countin.png in Resources */,
+				CC2FB4EC1C60CD63008C7EF5 /* StopMucic.png in Resources */,
+				CC2FB4E31C60C395008C7EF5 /* UNnormal.mp3 in Resources */,
 				CC62A5141C589CE600D55158 /* Assets.xcassets in Resources */,
 				CC62A5121C589CE600D55158 /* Main.storyboard in Resources */,
+				CC2FB4DD1C609C4A008C7EF5 /* left.png in Resources */,
 				CC62A53D1C58E27D00D55158 /* bgMusic.mp3 in Resources */,
+				CC2FB4CF1C6089CC008C7EF5 /* iconfont-fanhui.png in Resources */,
+				CC2FB4DF1C609C4A008C7EF5 /* xuanzhuan.png in Resources */,
+				CC2FB4C91C607EEC008C7EF5 /* 时光十年.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,9 +355,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC3A71521C5CDAAD00FA1C5D /* CustomView.swift in Sources */,
+				CC2FB4CB1C608370008C7EF5 /* QYViewController.swift in Sources */,
 				CC62A50F1C589CE600D55158 /* ViewController.swift in Sources */,
 				CC62A5431C58F3F700D55158 /* Block.swift in Sources */,
 				CC62A5411C58F08900D55158 /* GameView.swift in Sources */,
+				CC0F634D1C5F0ECC0089B9CD /* RevViewController.swift in Sources */,
+				CC0F634B1C5F078D0089B9CD /* BeginVC.swift in Sources */,
+				CC0F63511C5F28250089B9CD /* RevgameView.swift in Sources */,
 				CC62A50D1C589CE600D55158 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
